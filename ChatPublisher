@@ -1,0 +1,11 @@
+public class ChatPublisher {
+    @AuraEnabled
+    public static void publishMessage(String message, String username, String channel) {
+        ChatMessage__e chatMessage = new ChatMessage__e(
+            Message__c = message,
+            Username__c = username,
+            Channel__c = channel
+        );
+        EventBus.publish(chatMessage);
+    }
+}
