@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title="Chat Room">
+        <div class="chat-container">
+            <template for:each={messages} for:item="message">
+                <p key={message.id} class={message.className}>
+                    <strong>{message.username}:</strong> {message.message}
+                </p>
+            </template>
+            <p if:true={typingIndicator} class="typing-indicator">{typingIndicator}</p>
+        </div>
+
+        <div class="input-container">
+            <lightning-button-icon icon-name="utility:emoji" alternative-text="Add Emoji" onclick={toggleEmojiPicker}></lightning-button-icon><br/>
+            <lightning-input
+                label="Your Message"
+                value={newMessage}
+                onchange={handleInputChange}
+                onkeypress={handleKeyPress}
+            ></lightning-input><br/>
+            <lightning-button label="Send" onclick={sendMessage} variant="brand"></lightning-button>
+        </div>
+
+        <template if:true={showEmojiPicker}>
+            <div class="emoji-picker">
+                <button onclick={addEmoji}>😊</button>
+                <button onclick={addEmoji}>😂</button>
+                <button onclick={addEmoji}>😍</button>
+                <button onclick={addEmoji}>😢</button>
+                <button onclick={addEmoji}>👍</button>
+                <!-- Add more emojis as needed -->
+            </div>
+        </template>
+    </lightning-card>
+</template>
